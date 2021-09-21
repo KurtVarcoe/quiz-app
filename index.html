@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="heading">
+        <h1>eCommerce Quiz</h1>
+        <h2 class="question-number">Question 1 of 3</h2>
+        <h4 class="question question-1" id="question-1">Question 1: Which of the following is not a real eCommerce platform?</h4>
+        <h4 class="question question-2" id="question-2">Question 2: If Shopify is so good, why are Shopify developers necessary?</h4>
+        <h4 class="question question-3" id="question-3">Question 3: Which of the following is true about Shopify developers?</h4>
+    </div>
+    <form>
+        <div class="answers">
+            <div>
+                <input type="radio" id="question-1-option-1" class="answer-options question-1" value="question-1-option-1" name="question-1">
+                <label for="question-1-option-1" class="question-1">Shopify</label>
+            </div>
+            <div>  
+                <input type="radio" id="question-1-option-2" class="answer-options question-1" value="question-1-option-2" name="question-1">
+                <label for="question-1-option-2" class="question-1">WooCommerce</label>
+            </div>
+            <div>
+                <input type="radio" id="question-1-option-3" class="answer-options question-1" value="question-1-option-3" name="question-1">
+                <label for="question-1-option-3" class="question-1">ShopCommerce (Correct)</label>
+            </div>
+            <div>
+                <input type="radio" id="question-1-option-4" class="answer-options question-1" value="question-1-option-4" name="question-1">
+                <label for="question-1-option-4" class="question-1">BigCommerce</label>
+            </div>
+            <div>
+                <input type="radio" id="question-2-option-1" class="answer-options question-2" value="question-2-option-1" name="question-2">
+                <label for="question-2-option-1" class="question-2">To save time on things like store setups and migrations</label>
+            </div>
+            <div>  
+                <input type="radio" id="question-2-option-2" class="answer-options question-2" value="question-2-option-2" name="question-2">
+                <label for="question-2-option-2" class="question-2">To extend the limited design options and functionalities of themes with custom code</label>
+            </div>
+            <div>
+                <input type="radio" id="question-2-option-3" class="answer-options question-2" value="question-2-option-3" name="question-2">
+                <label for="question-2-option-3" class="question-2">To provide support with a deep understanding of how the platform works and what its limitations are</label>
+            </div>
+            <div>
+                <input type="radio" id="question-2-option-4" class="answer-options question-2" value="question-2-option-4" name="question-2">
+                <label for="question-2-option-4" class="question-2">All the above (Correct)</label>
+            </div>
+            <div>
+                <input type="radio" id="question-3-option-1" class="answer-options question-3" value="question-3-option-1" name="question-3">
+                <label for="question-3-option-1" class="question-3">They are paid extremely well</label>
+            </div>
+            <div>  
+                <input type="radio" id="question-3-option-2" class="answer-options question-3" value="question-3-option-2" name="question-3">
+                <label for="question-3-option-2" class="question-3">There is a high demand for them</label>
+            </div>
+            <div>
+                <input type="radio" id="question-3-option-3" class="answer-options question-3" value="question-3-option-3" name="question-3">
+                <label for="question-3-option-3" class="question-3">They need to know web development, the platform itself and the liquid template language</label>
+            </div>
+            <div>
+                <input type="radio" id="question-3-option-4" class="answer-options question-3" value="question-3-option-4" name="question-3">
+                <label for="question-3-option-4" class="question-3">All the above (Correct)</label>
+            </div>
+        </div>
+        <span class="navigation">
+            <button id="previous">< Previous</button>
+            <button id="next">Next ></button>
+            <input type="submit" class="submit">
+            <h6 id="timer">Timer</h6>
+        </span>
+    </form>
+    <script>
+        
+    </script> 
+</body>
+</html>
