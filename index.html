@@ -10,7 +10,7 @@
 <body>
     <div class="heading">
         <h1>eCommerce Quiz</h1>
-        <h2 class="question-number">Question 1 of 3</h2>
+        <h2 class="question-header">Question 1 of 3</h2>
         <h4 class="question question-1" id="question-1">Question 1: Which of the following is not a real eCommerce platform?</h4>
         <h4 class="question question-2" id="question-2">Question 2: If Shopify is so good, why are Shopify developers necessary?</h4>
         <h4 class="question question-3" id="question-3">Question 3: Which of the following is true about Shopify developers?</h4>
@@ -18,7 +18,7 @@
     <form>
         <div class="answers">
             <div>
-                <input type="radio" id="question-1-option-1" class="answer-options question-1" value="question-1-option-1" name="question-1">
+                <input type="radio" id="question-1-option-1" class="answer-options question-1" value="question-1-option-1" name="question-1" >
                 <label for="question-1-option-1" class="question-1">Shopify</label>
             </div>
             <div>  
@@ -67,14 +67,131 @@
             </div>
         </div>
         <span class="navigation">
-            <button id="previous">< Previous</button>
-            <button id="next">Next ></button>
-            <input type="submit" class="submit">
+            <button id="previous" type="button">< Previous</button>
+            <button id="next" type="button">Next ></button>
+            <button class="submit" type="button">Submit</button>
             <h6 id="timer">Timer</h6>
         </span>
     </form>
+    <h3 class="results">Results</h3>
+    <h5 class="results" id="score">Your score is: </h5>
+    <h5 class="results">Time</h5>
+    <h5 class="results" id="question-1-correctness">You got question one wrong</h5>
+    <h5 class="results" id="question-2-correctness">You got question two wrong</h5>
+    <h5 class="results" id="question-3-correctness">You got question three wrong</h5>
+
     <script>
+        var questionNumber = 1;
+        var score = 0;
+        var questionOneCorrectness = false;
+        var questionTwoCorrectness = false;
+        var questionThreeCorrectness = false;
+        var questionHeader = document.getElementsByClassName('question-header')[0];
+        var nextButton = document.getElementById('next');
+        var previousButton = document.getElementById('previous');
+        var submitButton = document.getElementsByClassName('submit')[0];
+        var firstQuestion = document.getElementsByClassName('question-1');
+        var secondQuestion = document.getElementsByClassName('question-2');
+        var thirdQuestion = document.getElementsByClassName('question-3');
+        // var radioButtons = document.getElementsByClassName('answer-options-question-1');
+        var results = document.getElementsByClassName('results');
+
+        nextButton.addEventListener('click', function nextQuestion() {
+            // if (questionNumber === 1 && correct answer) {score++;}    
+            questionNumber++;
+            trackQuestion();
+        })
         
+        previousButton.addEventListener('click', function previousQuestion() {
+            questionNumber--;
+            trackQuestion();    
+        })
+
+        submitButton.addEventListener('click', function showResults () {
+            for (var result of results) {
+                result.style.display = 'block';
+            }
+            previousButton.style.display = 'none';
+            submitButton.style.display = 'none';
+            questionHeader.style.display = 'none';
+            for (let component of thirdQuestion) {
+                component.style.display = 'none';
+            }
+            document.getElementsByTagName('h6')[0].style.display = 'none';
+            document.getElementsByTagName('h1')[0].style.display = 'none';
+            document.getElementsByClassName('answers')[0].style.display = 'none';
+        })
+        
+        function trackQuestion() {
+            if (questionNumber === 1) {
+                for (let component of firstQuestion) {
+                    component.style.display = 'inline';
+                }
+                for (let component of secondQuestion) {
+                    component.style.display = 'none';
+                }
+                for (let component of thirdQuestion) {
+                    component.style.display = 'none';
+                }
+                previousButton.style.display = 'none';
+                nextButton.style.display = 'inline';
+                submitButton.style.display = 'none';
+                questionHeader.textContent = 'Question 1 of 3';
+            }
+            if (questionNumber === 2) {
+                for (let component of firstQuestion) {
+                    component.style.display = 'none';
+                }
+                for (let component of secondQuestion) {
+                    component.style.display = 'inline';
+                }
+                for (let component of thirdQuestion) {
+                    component.style.display = 'none';
+                }
+                previousButton.style.display = 'inline';
+                nextButton.style.display = 'inline';
+                submitButton.style.display = 'none';
+                questionHeader.textContent = 'Question 2 of 3';
+            }
+            if (questionNumber === 3) {
+                for (let component of firstQuestion) {
+                    component.style.display = 'none';
+                }
+                for (let component of secondQuestion) {
+                    component.style.display = 'none';
+                }
+                for (let component of thirdQuestion) {
+                    component.style.display = 'inline';
+                }
+                nextButton.style.display = 'none';
+                previousButton.style.display = 'inline';
+                submitButton.style.display = 'inline';
+                questionHeader.textContent = 'Question 3 of 3';
+            }
+        }
+
+        // nextButton.disabled = true;
+        // nextButton.style.opacity = 0.5;
+        // for (radioButton of radioButtons) {
+        //     if (radioButton.checked === true) {
+        //         nextButton.disabled = false;
+        //         nextButton.style.opacity = 1;
+        //     } 
+        //     else {
+        //         nextButton.disabled = true;
+        //         nextButton.style.opacity = 0.5;
+        //     }
+        // }
+
+        // Disable next button
+            // When checkbox clicked, enable next button on Q1 and Q2
+            // When checkbox clicked on Q3, enable submit button
+        // When submit button clicked, show choices
+            //when choices correct show them
+            //when choice incorrect, show correct
+            //show percentage mark
+        //Change question number as question changes
+        // Create timer on right to keep track of how long effort takes
     </script> 
 </body>
 </html>

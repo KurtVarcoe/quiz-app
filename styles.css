@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 15px;
 }
 
+h4 {
+    margin-bottom: 10px;
+}
+
 span {
     width: 100%;
     display: flex;
@@ -38,14 +42,16 @@ button, .submit {
     padding: 10px;
 }
 
-
-
 .submit {
-    /* display: none; */
+    display: none;
+}
+
+.results {
+    display: none;
 }
 
 #previous {
-    /* display: none; */
+    display: none;
 }
 
 #timer {
