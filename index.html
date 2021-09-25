@@ -70,12 +70,12 @@
             <button id="previous" type="button">< Previous</button>
             <button id="next" type="button">Next ></button>
             <button class="submit" type="button">Submit</button>
-            <h6 id="timer">Timer</h6>
+            <h6 id="timer">00:00</h6>
         </span>
     </form>
     <h3 class="results">Results</h3>
     <h5 class="results" id="score">Your score is: </h5>
-    <h5 class="results">Time</h5>
+    <h5 class="results" id="final-time">Time</h5>
     <h5 class="results" id="question-1-correctness">You got question one wrong</h5>
     <h5 class="results" id="question-2-correctness">You got question two wrong</h5>
     <h5 class="results" id="question-3-correctness">You got question three wrong</h5>
@@ -95,6 +95,12 @@
         var thirdQuestion = document.getElementsByClassName('question-3');
         // var radioButtons = document.getElementsByClassName('answer-options-question-1');
         var results = document.getElementsByClassName('results');
+        var timer = document.getElementById('timer');
+        var seconds = 0;
+        var minutes = 0;
+        var finalTime = document.getElementById('final-time');
+
+        trackQuestion();
 
         nextButton.addEventListener('click', function nextQuestion() {
             // if (questionNumber === 1 && correct answer) {score++;}    
@@ -107,9 +113,11 @@
             trackQuestion();    
         })
 
+        
         submitButton.addEventListener('click', function showResults () {
             for (var result of results) {
                 result.style.display = 'block';
+                result.style.textAlign = 'center';
             }
             previousButton.style.display = 'none';
             submitButton.style.display = 'none';
@@ -120,6 +128,8 @@
             document.getElementsByTagName('h6')[0].style.display = 'none';
             document.getElementsByTagName('h1')[0].style.display = 'none';
             document.getElementsByClassName('answers')[0].style.display = 'none';
+            nextButton.style.display = 'none';
+            finalTime.textContent = "You completed the quiz in: " + timer.textContent;
         })
         
         function trackQuestion() {
@@ -133,8 +143,8 @@
                 for (let component of thirdQuestion) {
                     component.style.display = 'none';
                 }
-                previousButton.style.display = 'none';
-                nextButton.style.display = 'inline';
+                previousButton.disabled = true;
+                previousButton.style.opacity = '0.5';
                 submitButton.style.display = 'none';
                 questionHeader.textContent = 'Question 1 of 3';
             }
@@ -148,8 +158,10 @@
                 for (let component of thirdQuestion) {
                     component.style.display = 'none';
                 }
-                previousButton.style.display = 'inline';
-                nextButton.style.display = 'inline';
+                previousButton.disabled = false;
+                previousButton.style.opacity = '1';
+                nextButton.disabled = false;
+                nextButton.style.opacity = '1';
                 submitButton.style.display = 'none';
                 questionHeader.textContent = 'Question 2 of 3';
             }
@@ -163,25 +175,49 @@
                 for (let component of thirdQuestion) {
                     component.style.display = 'inline';
                 }
-                nextButton.style.display = 'none';
-                previousButton.style.display = 'inline';
+                nextButton.disabled = true;
+                nextButton.style.opacity = '0.5';
                 submitButton.style.display = 'inline';
                 questionHeader.textContent = 'Question 3 of 3';
             }
         }
 
-        // nextButton.disabled = true;
-        // nextButton.style.opacity = 0.5;
-        // for (radioButton of radioButtons) {
-        //     if (radioButton.checked === true) {
-        //         nextButton.disabled = false;
-        //         nextButton.style.opacity = 1;
-        //     } 
-        //     else {
-        //         nextButton.disabled = true;
-        //         nextButton.style.opacity = 0.5;
-        //     }
-        // }
+        setInterval(function() {
+            seconds++;
+            if (minutes < 10) {
+                if (seconds < 10) {
+                    timer.textContent = '0' + minutes + ':0' + seconds;
+                }
+                else if (seconds >= 10 && seconds < 60) {
+                    timer.textContent = '0'+ minutes +':' + seconds;
+                }
+                else if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                    timer.textContent = '0' + minutes + ':00';
+                }
+            }
+            else if (minutes >= 10 && minutes < 60) {
+                if (seconds < 10) {
+                    timer.textContent = minutes + ':0' + seconds;
+                }
+                else if (seconds >= 10 && seconds < 60) {
+                    timer.textContent = minutes +':' + seconds;
+                }
+                else if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                    timer.textContent = minutes + ':00';
+                }
+            }
+            else if (minutes === 60) {
+                timer.textContent = 'TIME UP!';
+            }
+        }, 1000);
+
+        // timer.textContent = timer.setInterval(() => {
+        //     time++;
+        // }, 1000);
 
         // Disable next button
             // When checkbox clicked, enable next button on Q1 and Q2
@@ -190,7 +226,6 @@
             //when choices correct show them
             //when choice incorrect, show correct
             //show percentage mark
-        //Change question number as question changes
         // Create timer on right to keep track of how long effort takes
     </script> 
 </body>

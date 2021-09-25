@@ -37,24 +37,24 @@ button, .submit {
 .answers {
     background-color: #f1f1f1;
     width: 95%;
-    margin: 0 auto;
-    margin-bottom: 20px;
+    margin: 15px;
     padding: 10px;
-}
-
-.submit {
-    display: none;
 }
 
 .results {
     display: none;
 }
 
-#previous {
+.hide {
     display: none;
+}
+
+#previous {
+    /* disabled: true; */
+    opacity: 0.5;
 }
 
 #timer {
     position: absolute;
-    right: 20px;
+    right: 35px;
 }
