@@ -27,7 +27,7 @@
             </div>
             <div>
                 <input type="radio" id="question-1-option-3" class="answer-options question-1" value="question-1-option-3" name="question-1">
-                <label for="question-1-option-3" class="question-1">ShopCommerce (Correct)</label>
+                <label for="question-1-option-3" class="question-1">ShopCommerce</label>
             </div>
             <div>
                 <input type="radio" id="question-1-option-4" class="answer-options question-1" value="question-1-option-4" name="question-1">
@@ -47,7 +47,7 @@
             </div>
             <div>
                 <input type="radio" id="question-2-option-4" class="answer-options question-2" value="question-2-option-4" name="question-2">
-                <label for="question-2-option-4" class="question-2">All the above (Correct)</label>
+                <label for="question-2-option-4" class="question-2">All the above</label>
             </div>
             <div>
                 <input type="radio" id="question-3-option-1" class="answer-options question-3" value="question-3-option-1" name="question-3">
@@ -63,7 +63,7 @@
             </div>
             <div>
                 <input type="radio" id="question-3-option-4" class="answer-options question-3" value="question-3-option-4" name="question-3">
-                <label for="question-3-option-4" class="question-3">All the above (Correct)</label>
+                <label for="question-3-option-4" class="question-3">All the above</label>
             </div>
         </div>
         <span class="navigation">
@@ -76,16 +76,22 @@
     <h3 class="results">Results</h3>
     <h5 class="results" id="score">Your score is: </h5>
     <h5 class="results" id="final-time">Time</h5>
-    <h5 class="results" id="question-1-correctness">You got question one wrong</h5>
-    <h5 class="results" id="question-2-correctness">You got question two wrong</h5>
-    <h5 class="results" id="question-3-correctness">You got question three wrong</h5>
+    <h5 class="results" id="question-1-correctness"></h5>
+    <h5 class="results" id="question-2-correctness"></h5>
+    <h5 class="results" id="question-3-correctness"></h5>
 
     <script>
         var questionNumber = 1;
         var score = 0;
-        var questionOneCorrectness = false;
-        var questionTwoCorrectness = false;
-        var questionThreeCorrectness = false;
+        var questionOneIsCorrect = false;
+        var questionTwoIsCorrect = false;
+        var questionThreeIsCorrect = false;
+        var questionOneCorrectAnswer = document.getElementById('question-1-option-3');
+        var questionTwoCorrectAnswer = document.getElementById('question-2-option-4');
+        var questionThreeCorrectAnswer = document.getElementById('question-3-option-4');
+        var questionOneCorrectness = document.getElementById('question-1-correctness');
+        var questionTwoCorrectness = document.getElementById('question-2-correctness');
+        var questionThreeCorrectness = document.getElementById('question-3-correctness');
         var questionHeader = document.getElementsByClassName('question-header')[0];
         var nextButton = document.getElementById('next');
         var previousButton = document.getElementById('previous');
@@ -93,17 +99,16 @@
         var firstQuestion = document.getElementsByClassName('question-1');
         var secondQuestion = document.getElementsByClassName('question-2');
         var thirdQuestion = document.getElementsByClassName('question-3');
-        // var radioButtons = document.getElementsByClassName('answer-options-question-1');
         var results = document.getElementsByClassName('results');
         var timer = document.getElementById('timer');
         var seconds = 0;
         var minutes = 0;
         var finalTime = document.getElementById('final-time');
+        var finalScore = document.getElementById('score');
 
         trackQuestion();
 
         nextButton.addEventListener('click', function nextQuestion() {
-            // if (questionNumber === 1 && correct answer) {score++;}    
             questionNumber++;
             trackQuestion();
         })
@@ -113,7 +118,6 @@
             trackQuestion();    
         })
 
-        
         submitButton.addEventListener('click', function showResults () {
             for (var result of results) {
                 result.style.display = 'block';
@@ -130,6 +134,61 @@
             document.getElementsByClassName('answers')[0].style.display = 'none';
             nextButton.style.display = 'none';
             finalTime.textContent = "You completed the quiz in: " + timer.textContent;
+            finalTime.style.color = timer.style.color;
+            if (questionOneCorrectAnswer.checked) {
+                questionOneIsCorrect = true;
+            }
+            if (questionTwoCorrectAnswer.checked) {
+                questionTwoIsCorrect = true;
+            }
+            if (questionThreeCorrectAnswer.checked) {
+                questionThreeIsCorrect = true;
+            }
+            if (questionOneIsCorrect) {
+                score++;
+            }
+            if (questionTwoIsCorrect) {
+                score++;
+            }
+            if (questionThreeIsCorrect) {
+                score++;
+            }
+
+            if (questionOneIsCorrect) {
+                questionOneCorrectness.textContent = 'You got question one correct';
+                questionOneCorrectness.style.color = 'green';
+            } else {
+                questionOneCorrectness.innerHTML = 'You got question one incorrect. <br> The correct answer was: ShopCommerce';
+                questionOneCorrectness.style.color = 'red';
+            }
+
+            if (questionTwoIsCorrect) {
+                questionTwoCorrectness.textContent = 'You got question two correct';
+                questionTwoCorrectness.style.color = 'green';
+            } else {
+                questionTwoCorrectness.innerHTML = 'You got question two incorrect. <br> The correct answer was: All of the above';
+                questionTwoCorrectness.style.color = 'red';
+            }
+
+            if (questionThreeIsCorrect) {
+                questionThreeCorrectness.textContent = 'You got question three correct';
+                questionThreeCorrectness.style.color = 'green';
+            } else {
+                questionThreeCorrectness.innerHTML = 'You got question three incorrect. <br> The correct answer was: All of the above';
+                questionThreeCorrectness.style.color = 'red';
+            }
+
+            var scorePercentage = (score/3*100).toFixed(2);
+            finalScore.textContent = "Your score is: " + scorePercentage + "%";
+            if (scorePercentage < 50) {
+                finalScore.style.color = 'red';
+            }
+            if (scorePercentage >= 50 && scorePercentage < 75) {
+                finalScore.style.color = 'orange';
+            }
+            if (scorePercentage >= 75) {
+                finalScore.style.color = 'green';
+            }
         })
         
         function trackQuestion() {
@@ -212,21 +271,9 @@
             }
             else if (minutes === 60) {
                 timer.textContent = 'TIME UP!';
+                timer.style.color = 'red';
             }
         }, 1000);
-
-        // timer.textContent = timer.setInterval(() => {
-        //     time++;
-        // }, 1000);
-
-        // Disable next button
-            // When checkbox clicked, enable next button on Q1 and Q2
-            // When checkbox clicked on Q3, enable submit button
-        // When submit button clicked, show choices
-            //when choices correct show them
-            //when choice incorrect, show correct
-            //show percentage mark
-        // Create timer on right to keep track of how long effort takes
     </script> 
 </body>
 </html>
